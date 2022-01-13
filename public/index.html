@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="styles/main.css">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <script src="js/main.js"  crossorigin="anonymous"></script>
+        <!-- Parse excel files -->
+        <script src="https://unpkg.com/read-excel-file@5.x/bundle/read-excel-file.min.js"></script>
+        <!-- Make http request -->
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    </head>
+<body>
+
+<nav class="navbar hbx">
+    <div class="container">
+        <span class="navbar-brand mb-0 h1">Plan Benefits Auditor</span>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row mt-3">
+        <!--
+            <div class="col-4">
+            <form id='form'>
+                <div class="input-group mb-3">
+                    <input type="file" class="form-control" id="sbc" name="doc" aria-label="Upload">
+                    <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon03" onclick="parseFile('sbc')">Upload SBC</button>
+                  </div>
+            </form>
+        </div>
+        -->
+        <div class="col-4">
+            <h3>PBT</h3>
+            <div class="input-group mb-3">
+                <form enctype="multipart/form-data" method="post" name="pbtinfo">
+                    <input type="file" class="form-control" id="pbt" name="pbt" onchange="parseFile('pbt')">
+                </form>
+            </div>
+            <div class="input-group mb-3">
+                <p>Carrier Detected:</p>
+                <p id="PBT-Carrier"></p>
+            </div>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Benefits</th>
+                        <th>In Network</th>
+                        <th>Out of Network</th>
+                    </tr>
+                </thead>
+                <tbody id="pbt-body"></tbody>
+              </table>
+        </div>
+        <div class="col-4">
+            <h3>SBC</h3>
+            <div class="input-group mb-3">
+                <form enctype="multipart/form-data" method="post" name="sbcinfo">
+                    <input type="file" class="form-control" id="sbc" name="sbc" onchange="parseFile('sbc')">
+                </form>
+            </div>
+            <div class="input-group mb-3">
+                <p>Carrier Detected:</p>
+                <p id="SBC-Carrier"></p>
+            </div>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Benefits</th>
+                        <th>In Network</th>
+                        <th>Out of Network</th>
+                    </tr>
+                </thead>
+                <tbody id="sbc-body"></tbody>
+              </table>
+        </div>
+        <div class="col-4">
+            <h3>SOB</h3>
+            <div class="input-group mb-3">
+                <form enctype="multipart/form-data" method="post" name="sobinfo">
+                    <input type="file" class="form-control" id="sob" name="sob" onchange="parseFile('sob')">
+                </form>
+            </div>
+            <div class="input-group mb-3">
+                <p>Carrier Detected:</p>
+                <p id="SOB-Carrier"></p>
+            </div>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Benefits</th>
+                        <th>In Network</th>
+                        <th>Out of Network</th>
+                    </tr>
+                </thead>
+                <tbody id="sob-body"></tbody>
+              </table>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+</html>
