@@ -7,13 +7,13 @@ services:
       - 3001:3001
     networks:
       - hbx-network
-  frontend:
+  ui:
     build:
-      context: ./frontend
+      context: ./ui
       dockerfile: Dockerfile
     volumes:
-      - ./frontend:/usr/src/app/frontend
-      - /usr/src/app/frontend/node_modules
+      - ./ui:/usr/src/app/ui
+      - /usr/src/app/ui/node_modules
     ports:
       - '3000:3000'
     networks:
