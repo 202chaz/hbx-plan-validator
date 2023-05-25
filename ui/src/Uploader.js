@@ -153,108 +153,108 @@ export default function Uploader() {
       if (pbtOOPInNetInd?.innerHTML && sobOOPInNetInd?.innerHTML && sbcOOPInNetInd?.innerHTML) {
         // Ind
         if (sobOOPInNetInd?.innerHTML !== pbtOOPInNetInd?.innerHTML) {
-          document.getElementsByClassName('sob-0-oop-in_network')[0].classList.add('table-danger')
+          document.getElementsByClassName('sob-0-oop-in_network')[0]?.classList.add('table-danger')
         } else {
-          document.getElementsByClassName('sob-0-oop-in_network')[0].classList.remove('table-danger')
+          document.getElementsByClassName('sob-0-oop-in_network')[0]?.classList.remove('table-danger')
         }
 
         if (sbcOOPInNetInd?.innerHTML !== pbtOOPInNetInd?.innerHTML) {
-          document.getElementsByClassName('sbc-0-oop-in_network')[0].classList.add('table-danger')
+          document.getElementsByClassName('sbc-0-oop-in_network')[0]?.classList.add('table-danger')
         } else {
-          document.getElementsByClassName('sbc-0-oop-in_network')[0].classList.remove('table-danger')
+          document.getElementsByClassName('sbc-0-oop-in_network')[0]?.classList.remove('table-danger')
         }
         // Fam
         if (sobOOPInNetFam?.innerHTML !== pbtOOPInNetFam?.innerHTML) {
-          document.getElementsByClassName('sob-1-oop-in_network')[0].classList.add('table-danger')
+          document.getElementsByClassName('sob-1-oop-in_network')[0]?.classList.add('table-danger')
         } else {
-          document.getElementsByClassName('sob-1-oop-in_network')[0].classList.remove('table-danger')
+          document.getElementsByClassName('sob-1-oop-in_network')[0]?.classList.remove('table-danger')
         }
 
         if (sbcOOPInNetFam?.innerHTML !== pbtOOPInNetFam?.innerHTML) {
-          document.getElementsByClassName('sbc-1-oop-in_network')[0].classList.add('table-danger')
+          document.getElementsByClassName('sbc-1-oop-in_network')[0]?.classList.add('table-danger')
         } else {
-          document.getElementsByClassName('sbc-1-oop-in_network')[0].classList.remove('table-danger')
+          document.getElementsByClassName('sbc-1-oop-in_network')[0]?.classList.remove('table-danger')
         }
       }
       // Checks In Net Tier 2 Max OOP
       if (true) {
         // Ind
         if (sobOOPInNetIndTier2?.innerHTML !== pbtOOPInNetIndTier2?.innerHTML) {
-          document.getElementsByClassName('sob-0-oop-in_network_(tier_2)')[0].classList.add('table-danger')
+          document.getElementsByClassName('sob-0-oop-in_network_(tier_2)')[0]?.classList.add('table-danger')
         } else {
-          document.getElementsByClassName('sob-0-oop-in_network_(tier_2)')[0].classList.remove('table-danger')
+          document.getElementsByClassName('sob-0-oop-in_network_(tier_2)')[0]?.classList.remove('table-danger')
         }
 
         if (sbcOOPInNetIndTier2?.innerHTML !== pbtOOPInNetIndTier2?.innerHTML) {
-          document.getElementsByClassName('sbc-0-oop-in_network_(tier_2)')[0].classList.add('table-danger')
+          document.getElementsByClassName('sbc-0-oop-in_network_(tier_2)')[0]?.classList.add('table-danger')
         } else {
-          document.getElementsByClassName('sbc-0-oop-in_network_(tier_2)')[0].classList.remove('table-danger')
+          document.getElementsByClassName('sbc-0-oop-in_network_(tier_2)')[0]?.classList.remove('table-danger')
         }
         // Fam
         if (sobOOPInNetFamTier2?.innerHTML !== pbtOOPInNetFamTier2?.innerHTML) {
-          document.getElementsByClassName('sob-1-oop-in_network_(tier_2)')[0].classList.add('table-danger')
+          document.getElementsByClassName('sob-1-oop-in_network_(tier_2)')[0]?.classList.add('table-danger')
         } else {
-          document.getElementsByClassName('sob-1-oop-in_network_(tier_2)')[0].classList.remove('table-danger')
+          document.getElementsByClassName('sob-1-oop-in_network_(tier_2)')[0]?.classList.remove('table-danger')
         }
 
         if (sbcOOPInNetFamTier2?.innerHTML !== pbtOOPInNetFamTier2?.innerHTML) {
-          document.getElementsByClassName('sbc-1-oop-in_network_(tier_2)')[0].classList.add('table-danger')
+          document.getElementsByClassName('sbc-1-oop-in_network_(tier_2)')[0]?.classList.add('table-danger')
         } else {
-          document.getElementsByClassName('sbc-1-oop-in_network_(tier_2)')[0].classList.remove('table-danger')
+          document.getElementsByClassName('sbc-1-oop-in_network_(tier_2)')[0]?.classList.remove('table-danger')
         }
       }
       // Checks Out of net Max OOP
       if (true) {
         // Ind
         if (sobOOPOONetInd?.innerHTML !== pbtOOPOONetInd?.innerHTML) {
-          document.getElementsByClassName('sob-0-oop-in_network_(tier_2)')[0].classList.add('table-danger')
+          document.getElementsByClassName('sob-0-oop-in_network_(tier_2)')[0]?.classList.add('table-danger')
         } else {
-          document.getElementsByClassName('sob-0-oop-in_network_(tier_2)')[0].classList.remove('table-danger')
+          document.getElementsByClassName('sob-0-oop-in_network_(tier_2)')[0]?.classList.remove('table-danger')
         }
 
         if (sbcOOPOONetInd?.innerHTML !== pbtOOPOONetInd?.innerHTML) {
-          document.getElementsByClassName('sbc-0-oop-out_of_network')[0].classList.add('table-danger')
+          document.getElementsByClassName('sbc-0-oop-out_of_network')[0]?.classList.add('table-danger')
         } else {
-          document.getElementsByClassName('sbc-0-oop-out_of_network')[0].classList.remove('table-danger')
+          document.getElementsByClassName('sbc-0-oop-out_of_network')[0]?.classList.remove('table-danger')
         }
         // Fam
         if (sobOOPOONetFam?.innerHTML !== pbtOOPOONetFam?.innerHTML) {
-          document.getElementsByClassName('sob-1-oop-out_of_network')[0].classList.add('table-danger')
+          document.getElementsByClassName('sob-1-oop-out_of_network')[0]?.classList.add('table-danger')
         } else {
-          document.getElementsByClassName('sob-1-oop-out_of_network')[0].classList.remove('table-danger')
+          document.getElementsByClassName('sob-1-oop-out_of_network')[0]?.classList.remove('table-danger')
         }
 
         if (sbcOOPOONetFam?.innerHTML !== pbtOOPOONetFam?.innerHTML) {
-          document.getElementsByClassName('sbc-1-oop-out_of_network')[0].classList.add('table-danger')
+          document.getElementsByClassName('sbc-1-oop-out_of_network')[0]?.classList.add('table-danger')
         } else {
-          document.getElementsByClassName('sbc-1-oop-out_of_network')[0].classList.remove('table-danger')
+          document.getElementsByClassName('sbc-1-oop-out_of_network')[0]?.classList.remove('table-danger')
         }
       }
       // Checks Combined In/Out of net Max OOP
       if (true) {
         // Ind
         if (sobOOPComInOutNetInd?.innerHTML !== pbtOOPComInOutNetInd?.innerHTML) {
-          document.getElementsByClassName('sob-0-oop-combined_in/out_network')[0].classList.add('table-danger')
+          document.getElementsByClassName('sob-0-oop-combined_in/out_network')[0]?.classList.add('table-danger')
         } else {
-          document.getElementsByClassName('sob-0-oop-combined_in/out_network')[0].classList.remove('table-danger')
+          document.getElementsByClassName('sob-0-oop-combined_in/out_network')[0]?.classList.remove('table-danger')
         }
 
         if (sbcOOPComInOutNetInd?.innerHTML !== pbtOOPComInOutNetInd?.innerHTML) {
-          document.getElementsByClassName('sbc-0-oop-combined_in/out_network')[0].classList.add('table-danger')
+          document.getElementsByClassName('sbc-0-oop-combined_in/out_network')[0]?.classList.add('table-danger')
         } else {
-          document.getElementsByClassName('sbc-0-oop-combined_in/out_network')[0].classList.remove('table-danger')
+          document.getElementsByClassName('sbc-0-oop-combined_in/out_network')[0]?.classList.remove('table-danger')
         }
         // Fam
         if (sobOOPComInOutNetFam?.innerHTML !== pbtOOPComInOutNetFam?.innerHTML) {
-          document.getElementsByClassName('sob-1-oop-combined_in/out_network')[0].classList.add('table-danger')
+          document.getElementsByClassName('sob-1-oop-combined_in/out_network')[0]?.classList.add('table-danger')
         } else {
-          document.getElementsByClassName('sob-1-oop-combined_in/out_network')[0].classList.remove('table-danger')
+          document.getElementsByClassName('sob-1-oop-combined_in/out_network')[0]?.classList.remove('table-danger')
         }
 
         if (sbcOOPComInOutNetFam?.innerHTML !== pbtOOPComInOutNetFam?.innerHTML) {
-          document.getElementsByClassName('sbc-1-oop-combined_in/out_network')[0].classList.add('table-danger')
+          document.getElementsByClassName('sbc-1-oop-combined_in/out_network')[0]?.classList.add('table-danger')
         } else {
-          document.getElementsByClassName('sbc-1-oop-combined_in/out_network')[0].classList.remove('table-danger')
+          document.getElementsByClassName('sbc-1-oop-combined_in/out_network')[0]?.classList.remove('table-danger')
         }
       }
       
