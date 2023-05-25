@@ -1,0 +1,24 @@
+services:
+  api:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    ports:
+      - 3001:3001
+    networks:
+      - hbx-network
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend:/usr/src/app/frontend
+      - /usr/src/app/frontend/node_modules
+    ports:
+      - '3000:3000'
+    networks:
+      - hbx-network
+
+networks:
+  hbx-network:
+    driver: bridge
