@@ -23,7 +23,7 @@ export default function Uploader() {
     let config = {
       method: 'post',
       maxBodyLength: Infinity,
-      url: 'http://localhost:3001/plan_names',
+      url: `${process.env.API}/plan_names`,
       data : data
     };
     
@@ -47,7 +47,7 @@ export default function Uploader() {
     let config = {
       method: 'post',
       maxBodyLength: Infinity,
-      url: 'http://localhost:3001/sob',
+      url: `${process.env.API}/sob`,
       data : data
     };
 
@@ -70,7 +70,7 @@ export default function Uploader() {
     let config = {
       method: 'post',
       maxBodyLength: Infinity,
-      url: 'http://localhost:3001/sbc',
+      url: `${process.env.API}/sbc`,
       data : data
     };
 
@@ -97,7 +97,7 @@ export default function Uploader() {
     let config = {
       method: 'post',
       maxBodyLength: Infinity,
-      url: 'http://localhost:3001/pbt_data',
+      url: `${process.env.API}/pbt_data`,
       data : data
     };
     
