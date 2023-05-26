@@ -23,7 +23,7 @@ export default function Uploader() {
     let config = {
       method: 'post',
       maxBodyLength: Infinity,
-      url: `${process.env.API}/plan_names`,
+      url: `${process.env.REACT_APP_API}/plan_names`,
       data : data
     };
     
@@ -47,7 +47,7 @@ export default function Uploader() {
     let config = {
       method: 'post',
       maxBodyLength: Infinity,
-      url: `${process.env.API}/sob`,
+      url: `${process.env.REACT_APP_API}/sob`,
       data : data
     };
 
@@ -70,7 +70,7 @@ export default function Uploader() {
     let config = {
       method: 'post',
       maxBodyLength: Infinity,
-      url: `${process.env.API}/sbc`,
+      url: `${process.env.REACT_APP_API}/sbc`,
       data : data
     };
 
@@ -97,7 +97,7 @@ export default function Uploader() {
     let config = {
       method: 'post',
       maxBodyLength: Infinity,
-      url: `${process.env.API}/pbt_data`,
+      url: `${process.env.REACT_APP_API}/pbt_data`,
       data : data
     };
     
