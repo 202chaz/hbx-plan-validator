@@ -150,7 +150,7 @@ export default function Uploader() {
       const sbcOOPComInOutNetInd = document.getElementById('sbc-0-oop-combined_in/out_network');
       const sbcOOPComInOutNetFam = document.getElementById('sbc-1-oop-combined_in/out_network');
       // Checks In Net Max OOP
-      if (pbtOOPInNetInd?.innerHTML && sobOOPInNetInd?.innerHTML && sbcOOPInNetInd?.innerHTML) {
+      if (true) {
         // Ind
         if (sobOOPInNetInd?.innerHTML !== pbtOOPInNetInd?.innerHTML) {
           document.getElementsByClassName('sob-0-oop-in_network')[0]?.classList.add('table-danger')
