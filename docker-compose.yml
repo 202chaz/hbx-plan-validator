@@ -15,7 +15,7 @@ services:
       - ./ui:/usr/src/app/ui
       - /usr/src/app/ui/node_modules
     ports:
-      - '3000:3000'
+      - '3002:3002'
     networks:
       - hbx-network
 

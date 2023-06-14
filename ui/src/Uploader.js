@@ -90,8 +90,8 @@ export default function Uploader() {
 
     let data = new FormData()
 
-    data.append('plan_name', pbtOption.plan_name);
-    data.append('sheet_name', pbtOption.sheet_name);
+    data.append('plan_name', pbtOption.key);
+    data.append('sheet_name', pbtOption.sheet);
     data.append('file', pbtFile);
 
     let config = {
@@ -104,6 +104,7 @@ export default function Uploader() {
     axios.request(config)
     .then((response) => {
       setPbtTableData(response.data.data)
+      console.log(response.data.data)
       compareValues()
     })
     .catch((error) => {
@@ -308,7 +309,7 @@ export default function Uploader() {
                                         return(
                                           <tr key={ind} className={`pbt-${ind}-oop-${formatKey(d?.key)}`}>
                                             <td id={`pbt-${ind}-oop-key`} data-parent-key={d?.key}>{ind === 0 ? 'Individual' : 'Family'}</td>
-                                            <td id={`pbt-${ind}-oop-${formatKey(d?.key)}`} data-parent-key={d?.key}>{ind === 0 ? val['Individual']: val['Family']}</td>
+                                            <td id={`pbt-${ind}-oop-${formatKey(d?.key)}`} data-parent-key={d?.key}>{ind === 0 ? val['data']: val['data']}</td>
                                           </tr>
                                         )
                                       })

@@ -7,6 +7,7 @@ import pdfplumber
 import re
 import numpy
 import pandas as pd
+import math
 
 app = FastAPI()
 
@@ -49,31 +50,110 @@ async def plan_names(request: Request, file: UploadFile = File(...)):
       plan_names = pd.read_excel(content, sheet_name=sheet, skiprows=[0,1], usecols=["Plan Variant Marketing Name*", "HIOS Plan ID\n(Standard Component + Variant)"])
       # plan_names = pd.read_excel("/content/Aetna Life PBT_v3.0.xlsm", sheet_name=[sheet], skiprows=[0,1])
       for plan in plan_names.values:
-        plans_arr.append({'key': plan[0], 'plan_name': plan[1], 'sheet_name': sheet})
+        # Only get plans that end in -01
+        if plan[0] and '01' in plan[0].split("-")[1]:
+          plans_arr.append({'key': plan[0], 'plan_name': plan[1], 'sheet': sheet})
+
   return plans_arr
 
 @app.post("/pbt_data")
-async def pbt_data(plan_name: str = Form(...), sheet_name:str = Form(...), file: UploadFile = File(...)):
+async def pbt_data(plan_name: str = Form(...), sheet_name: str = Form(...), file: UploadFile = File(...)):
   content = await file.read()
   arr = []
+  df = pd.read_excel(content, sheet_name=sheet_name)
+  # Maximum Out of Pocket for Medical and Drug EHB Benefits (Total)
+  key_start = df.columns.get_loc("Maximum Out of Pocket for Medical and Drug EHB Benefits (Total)")
+  key_end = df.columns.get_loc("Medical EHB Deductible")
+  # Get plan row
+  selected_plan = df.loc[df['All fields with an asterisk (*) are required'] == plan_name]
+  plan_data = selected_plan.iloc[:, key_start:key_end]
+  sub_categories = []
 
+  if key_start and key_end:
+    column_data = df.iloc[:, key_start:key_end]
+    shape = column_data.shape
+    num_of_cols = shape[1]
+    # Get row names
 
-  maximum_out_of_pocket_for_medical_and_drug_ehb_benefits = pd.read_excel(content, sheet_name=sheet_name, usecols="AN:AU")
-  i = 0
-  arr.append({'key': 'Maximum Out of Pocket for Medical and Drug EHB Benefits (Total)', 'data': []})
-  for row in maximum_out_of_pocket_for_medical_and_drug_ehb_benefits.items():
-    if isinstance(row[1][0], str):
-      i += 1
-      arr[0]['data'].append({'key': row[1][0], 'data': []})
-    if i <= 1:
-      arr[0]['data'][i-1]['data'].append({row[1][1]:str(row[1][2])})
-    if i > 1 and i <= 2:
-      arr[0]['data'][i-1]['data'].append({row[1][1]:str(row[1][2])})
-    if i > 2 and i <= 3:
-      arr[0]['data'][i-1]['data'].append({row[1][1]:str(row[1][2])})
-    if i > 3 and i <= 4:
-      arr[0]['data'][i-1]['data'].append({row[1][1]:str(row[1][2])})
+    for i in range(0, num_of_cols):
+      for index, row in column_data.iterrows():
+        if index == 0:
+          if isinstance(row[i], str):
+            sub_categories.append({'key': str(row[i]), 'data': []})
+        if index == 1:
+          if i <= 1:
+            sub_categories[0]['data'].append({'key': row[i], 'data': str(plan_data.values[0][i])})
+          if i > 1 and i <= 3:
+            sub_categories[1]['data'].append({'key': row[i], 'data': str(plan_data.values[0][i])})
+          if i > 3 and i <= 5:
+            sub_categories[2]['data'].append({'key': row[i], 'data': str(plan_data.values[0][i])})
+          if i > 5 and i <= 7:
+            sub_categories[3]['data'].append({'key': row[i], 'data': str(plan_data.values[0][i])})
+    
+    arr.append({'key': 'Maximum Out of Pocket for Medical and Drug EHB Benefits (Total)', 'data': sub_categories})
 
+  # Maximum Out of Pocket for Medical EHB Benefits
+  key_start = df.columns.get_loc("Maximum Out of Pocket for Medical EHB Benefits")
+  key_end = df.columns.get_loc("Maximum Out of Pocket for Drug EHB Benefits")
+  # Get plan row
+  selected_plan = df.loc[df['All fields with an asterisk (*) are required'] == plan_name]
+  plan_data = selected_plan.iloc[:, key_start:key_end]
+  sub_categories = []
+
+  if key_start and key_end:
+    column_data = df.iloc[:, key_start:key_end]
+    shape = column_data.shape
+    num_of_cols = shape[1]
+    # Get row names
+
+    for i in range(0, num_of_cols):
+      for index, row in column_data.iterrows():
+        if index == 0:
+          if isinstance(row[i], str):
+            sub_categories.append({'key': row[i], 'data': []})
+        if index == 1:
+          if i <= 1:
+            sub_categories[0]['data'].append({'key': row[i], 'data': '' if math.isnan(plan_data.values[0][i]) else str(plan_data.values[0][i])})
+          if i > 1 and i <= 3:
+            sub_categories[1]['data'].append({'key': row[i], 'data': '' if math.isnan(plan_data.values[0][i]) else str(plan_data.values[0][i])})
+          if i > 3 and i <= 5:
+            sub_categories[2]['data'].append({'key': row[i], 'data': '' if math.isnan(plan_data.values[0][i]) else str(plan_data.values[0][i])})
+          if i > 5 and i <= 7:
+            sub_categories[3]['data'].append({'key': row[i], 'data': '' if math.isnan(plan_data.values[0][i]) else str(plan_data.values[0][i])})
+
+    arr.append({'key': 'Maximum Out of Pocket for Medical EHB Benefits', 'data': sub_categories})
+    
+  # Maximum Out of Pocket for Drug EHB Benefits
+  key_start = df.columns.get_loc("Maximum Out of Pocket for Drug EHB Benefits")
+  key_end = df.columns.get_loc("Maximum Out of Pocket for Medical and Drug EHB Benefits (Total)")
+  # Get plan row
+  selected_plan = df.loc[df['All fields with an asterisk (*) are required'] == plan_name]
+  plan_data = selected_plan.iloc[:, key_start:key_end]
+  sub_categories = []
+
+  if key_start and key_end:
+    column_data = df.iloc[:, key_start:key_end]
+    shape = column_data.shape
+    num_of_cols = shape[1]
+    # Get row names
+
+    for i in range(0, num_of_cols):
+      for index, row in column_data.iterrows():
+        if index == 0:
+          if isinstance(row[i], str):
+            sub_categories.append({'key': row[i], 'data': []})
+        if index == 1:
+          if i <= 1:
+            sub_categories[0]['data'].append({'key': row[i], 'data': '' if math.isnan(plan_data.values[0][i]) else str(plan_data.values[0][i])})
+          if i > 1 and i <= 3:
+            sub_categories[1]['data'].append({'key': row[i], 'data': '' if math.isnan(plan_data.values[0][i]) else str(plan_data.values[0][i])})
+          if i > 3 and i <= 5:
+            sub_categories[2]['data'].append({'key': row[i], 'data': '' if math.isnan(plan_data.values[0][i]) else str(plan_data.values[0][i])})
+          if i > 5 and i <= 7:
+            sub_categories[3]['data'].append({'key': row[i], 'data': '' if math.isnan(plan_data.values[0][i]) else str(plan_data.values[0][i])})
+    
+    arr.append({'key': 'Maximum Out of Pocket for Drug EHB Benefits', 'data': sub_categories})
+  
   return { 'data': arr }
 
 @app.post("/plan_details")
@@ -152,15 +232,26 @@ async def sbc(request: Request, file: UploadFile = File(...)):
               if i and i == 1:
                 arr[0]['data'][0]['data'].append({'Individual': value})
                 arr[0]['data'][1]['data'].append({'Individual': ''})
+                arr[0]['data'][2]['data'].append({'Individual': ''})
                 arr[0]['data'][3]['data'].append({'Individual': ''})
               if i and i == 2:
                 arr[0]['data'][0]['data'].append({'Family': value})
                 arr[0]['data'][1]['data'].append({'Family': ''})
+                arr[0]['data'][2]['data'].append({'Family': ''})
                 arr[0]['data'][3]['data'].append({'Family': ''})
               if i and i == 3:
                 arr[0]['data'][2]['data'].append({'Individual': value})
+                arr[0]['data'][1]['data'].append({'Individual': ''})
+                arr[0]['data'][3]['data'].append({'Individual': ''})
               if i and i == 4:
                 arr[0]['data'][2]['data'].append({'Family': value})
+                arr[0]['data'][1]['data'].append({'Family': ''})
+                arr[0]['data'][3]['data'].append({'Family': ''})
+
+  # Gets maximum Out of Pocket for Medical EHB Benefits
+  arr.append({'key': 'Maximum Out of Pocket for Medical EHB Benefits', 'data': [{'key': 'In Network', 'data': [{'Individual': ''}, {'Family': ''}]}, {'key': 'In Network (Tier 2)', 'data': [{'Individual': ''}, {'Family': ''}]}, {'key': 'Out of Network', 'data': [{'Individual': ''}, {'Family': ''}]}, {'key': 'Combined In/Out Network', 'data': [{'Individual': ''}, {'Family': ''}]}]})
+  # Gets maximum Out of Pocket for Drug EHB Benefits
+  arr.append({'key': 'Maximum Out of Pocket for Drug EHB Benefits', 'data': [{'key': 'In Network', 'data': [{'Individual': ''}, {'Family': ''}]}, {'key': 'In Network (Tier 2)', 'data': [{'Individual': ''}, {'Family': ''}]}, {'key': 'Out of Network', 'data': [{'Individual': ''}, {'Family': ''}]}, {'key': 'Combined In/Out Network', 'data': [{'Individual': ''}, {'Family': ''}]}]})
   
   return {"data": arr}
 
@@ -259,8 +350,11 @@ async def sob(request: Request, file: UploadFile = File(...)):
               arr[0]['data'][1]['data'].append({'Family': ''})
               arr[0]['data'][2]['data'].append({'Family': ''})
               arr[0]['data'][3]['data'].append({'Family': ''})
-
   
+  # Gets maximum Out of Pocket for Medical EHB Benefits
+  arr.append({'key': 'Maximum Out of Pocket for Medical EHB Benefits', 'data': [{'key': 'In Network', 'data': [{'Individual': ''}, {'Family': ''}]}, {'key': 'In Network (Tier 2)', 'data': [{'Individual': ''}, {'Family': ''}]}, {'key': 'Out of Network', 'data': [{'Individual': ''}, {'Family': ''}]}, {'key': 'Combined In/Out Network', 'data': [{'Individual': ''}, {'Family': ''}]}]})
+  # Gets maximum Out of Pocket for Drug EHB Benefits
+  arr.append({'key': 'Maximum Out of Pocket for Drug EHB Benefits', 'data': [{'key': 'In Network', 'data': [{'Individual': ''}, {'Family': ''}]}, {'key': 'In Network (Tier 2)', 'data': [{'Individual': ''}, {'Family': ''}]}, {'key': 'Out of Network', 'data': [{'Individual': ''}, {'Family': ''}]}, {'key': 'Combined In/Out Network', 'data': [{'Individual': ''}, {'Family': ''}]}]})
 
   return {"data": arr}
 
